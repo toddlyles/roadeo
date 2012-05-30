@@ -1,0 +1,15 @@
+<h1>All Ideas</h1>
+
+
+
+<ul>
+
+	<% @ideas.each do |idea| %>
+		<li>
+			<%=link_to idea.title, idea %>
+		</li>
+
+	<%end%>
+
+</ul>
+
