@@ -5,19 +5,11 @@ class IdeasController < ApplicationController
   #GET ACTIONS
 
   def new
-    if user_signed_in?
   	 @idea = Idea.new
-    else
-      render 'devise/registrations/new'
-    end 
   end
 
   def edit
-    if user_signed_in?
   	 @idea = Idea.find(params[:id])
-    else
-      render 'devise/registrations/new'
-    end
   end
 
   def index
