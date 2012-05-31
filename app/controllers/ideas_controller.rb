@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
   
+  before_filter :authenticate_user!
+
   #GET ACTIONS
 
   def new
