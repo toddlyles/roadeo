@@ -13,15 +13,20 @@
 				<nav>
 					<ul class="nav pull-right">
 						<%if user_signed_in? %>
-							<li>Signed in as <%=current_user.email %> 
-								<%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+							<li>Signed in as <%=current_user.email %> <%= link_to "Sign out", destroy_user_session_path%></li>
+						<%else%>
+							<li><%= link_to"Sign In",sign_in_path%></li>
 						<%end%>
 					</ul>
 				</nav>
 		</header>
 		<div class ="container">
 			<p class="alert"><%= alert %></p>
-			<%= yield %>
+			<div class ="row">
+				<div class="span12">
+					<%= yield %>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

@@ -1,10 +1,18 @@
 Roadeo::Application.routes.draw do
-  
-  devise_for :users
+ 
 
   get "static_pages/home"
 
   root to: 'static_pages#home'
+
+  #devise_for :users
+  devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
+
+  devise_scope :user do
+    get "sign_in", :to => "devise/sessions#new"
+  end
+
+
 
   resources :ideas
 
