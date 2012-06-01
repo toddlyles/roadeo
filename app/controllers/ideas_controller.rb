@@ -24,7 +24,9 @@ class IdeasController < ApplicationController
   #POST ACTION
 
   def create
-  	@idea = Idea.new(params[:idea])
+    # the process below results in User ID getting written to the Idea record during creation...yay!
+    @user = current_user
+  	@idea = @user.ideas.new(params[:idea])
   	@idea.save
   	render 'show'
   end

@@ -12,5 +12,8 @@
 class Idea < ActiveRecord::Base
   attr_accessible :title, :priority
 
+  belongs_to :user, inverse_of: :ideas
+
   validates :title, presence: true
+  validates :user, presence: true
 end
