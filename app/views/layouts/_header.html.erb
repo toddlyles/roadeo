@@ -1,0 +1,13 @@
+<header class="navbar navbar-fixed-top">
+	<div class ="navbar-inner">
+		<%= link_to "roadeo","#",id:"logo" %>
+		<nav>
+			<ul class="nav pull-right">
+				<%if user_signed_in? %>
+					<li>Signed in as <%=current_user.email %> <%= link_to "Sign out", destroy_user_session_path%></li>
+				<%else%>
+					<li><%= link_to"Sign In",sign_in_path%></li>
+				<%end%>
+			</ul>
+		</nav>
+</header>
