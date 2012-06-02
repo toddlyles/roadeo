@@ -27,8 +27,13 @@ class IdeasController < ApplicationController
     # the process below results in User ID getting written to the Idea record during creation...yay!
     @user = current_user
   	@idea = @user.ideas.new(params[:idea])
-  	@idea.save
-  	render 'show'
+  	if @idea.save
+      flash.now[:success] = "Saved."
+  	  render 'show'
+    else
+      flash.now[:error] = "Errors were found: #{@idea.errors.full_messages.each do |msg| (puts msg) end}" 
+      render 'new'
+    end
   end
 
   #PUT ACTION
@@ -36,8 +41,10 @@ class IdeasController < ApplicationController
   def update
   	@idea = Idea.find(params[:id])
   	if @idea.update_attributes(params[:idea])
+      flash.now[:success] ="Saved."
   		render 'show'
   	else
+      flash.now[:error] = "Errors were found: #{@idea.errors.full_messages.each do |msg| (puts msg) end}"
   		render 'edit'
   	end
   end
