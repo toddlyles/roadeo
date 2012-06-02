@@ -1,13 +1,15 @@
-<h1>New Idea</h1>
+<div class="span6">
+	
+	<h2>New Idea</h2>
+	<%= form_for (@idea) do |f| %>
 
-<%= form_for (@idea) do |f| %>
+		<%= f.label :title %>
+		<%= f.text_field :title %>
 
-	<%= f.label :title %>
-	<%= f.text_field :title %>
+		<%= f.label :pitch %>
+		<%= f.text_area :pitch, size: "10x10" %>
 
-	<%= f.label :pitch %>
-	<%= f.text_area :pitch, size: "60x12" %>
+		<%= f.submit "Done!"  %>
 
-	<%= f.submit "Done!"  %>
-
-<%end%>
+	<%end%>
+</div>
