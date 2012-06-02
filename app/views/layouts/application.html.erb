@@ -9,7 +9,19 @@
 	<body>
 		<%= render 'layouts/header' %>
 		<div class ="container">
-			<p class="alert"><%= alert %></p>
+
+			<% if flash[:notice] %>
+				<div class="alert alert-info">
+					<p class="notice"><%= flash[:notice] %></p>
+				</div>
+			<%end%>
+
+			<% if flash[:error] %>
+				<div class="alert alert-error">
+					<p class="error"><%= flash[:error] %></p>
+				</div>
+			<%end%>
+
 			<div class ="row">
 				<div class="span12">
 					<%= yield %>
