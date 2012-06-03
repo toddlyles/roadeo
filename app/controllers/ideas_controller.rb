@@ -15,6 +15,7 @@ class IdeasController < ApplicationController
   def index
   	#@ideas = Idea.paginate(page:params[:range])
   	@ideas = Idea.all
+    @ideas = @ideas.sort_by! {|idea| idea.sum_of_ranks}
   end
 
   def show
