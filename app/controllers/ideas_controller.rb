@@ -36,6 +36,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
   #PUT ACTION
 
   def update
@@ -55,5 +56,8 @@ class IdeasController < ApplicationController
   	@Idea.find(params[:id]).destroy
   	redirect_to ideas_path
   end
+
+  #CUSTOM ACTIONS
+
 
 end

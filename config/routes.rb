@@ -1,8 +1,6 @@
 Roadeo::Application.routes.draw do
  
 
-  get "static_pages/home"
-
   root to: 'static_pages#home'
 
   #devise_for :users
@@ -12,9 +10,8 @@ Roadeo::Application.routes.draw do
     get "sign_in", :to => "devise/sessions#new"
   end
 
-
-
   resources :ideas
+  resources :ranks
 
   match '/list',to: 'ideas#index'
 
