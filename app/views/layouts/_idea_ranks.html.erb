@@ -1,0 +1,13 @@
+<h6 class="center">Ranking</h6>
+<br>
+<table class="table table-striped table-bordered table-condensed">
+	<thead>
+			<tr><td>User</td><td>Rank Value</td><td>Date</td>
+	</thead>
+	<tbody>
+		<% @idea.ranks.each do |rank| %>
+			<tr><td><%=rank.user.email%></td><td><%=rank.value%></td><td><%=rank.created_at%></tr>
+		<%end%>
+	</tbody>
+
+</table>

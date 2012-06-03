@@ -1,5 +1,17 @@
-<h1>Idea Details</h1>
+<h2>Idea Details</h2>
 
-<%= @idea.title %>
-<%= @idea.pitch %>
-<%= @idea.user.email %>
+<div class="span6">
+	<h3><%= @idea.title %></h3>
+	<br>
+	<h6>Submitted By</h6>
+	<p><%= @idea.user.email %></p>
+	<h6>Submitted On</h6>
+	<p><%= @idea.created_at%></p>
+	<hr>
+	<h6>The Pitch</h6>
+	<p><%= @idea.pitch %></p>
+</div>
+
+<div class="span6">
+	<%= render 'layouts/idea_ranks' %>
+</div>

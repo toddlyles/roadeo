@@ -32,6 +32,8 @@ textarea{
 	margin-bottom:10px;
 }
 
+
+
 /*typography*/
 
 h1,h2,h3,h4,h5,h6{
@@ -54,11 +56,22 @@ h2{
 	color:$grayLight;
 }
 
+
 p{
 	font-size:1.1em;
 	line-height:1.7em;
 }
 
+thead{
+	background-color:#4386e6;
+	font-weight:bold;
+	letter-spacing:1px;
+	color:#fff;
+}
+
+.table-bordered{
+	border:1px solid #4386e6;
+}
 
 .navbar{
 	background-color:#4386e6;
