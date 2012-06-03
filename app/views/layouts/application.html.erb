@@ -28,9 +28,6 @@
 		</div>
 		<% if Rails.env.development? %>
 		<%= debug(params) %>
-			<% if user_signed_in? %>
-				And User ID is: <%=current_user.id %>
-			<%end%>
 		<%end%>
 	</body>
 </html>

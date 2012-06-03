@@ -26,6 +26,20 @@ class Idea < ActiveRecord::Base
   			too_short: "must have at least 20 characters."}
 
   validates :user, presence: true
- 
+
+
+
+  def sum_of_ranks
+  	
+  	@ranks = self.ranks
+  	@sum_of_ranks = 0
+
+  	@ranks.each do |rank| 
+  		@sum_of_ranks += rank.value
+    end
+
+  	return @sum_of_ranks
+
+  end 
 
 end

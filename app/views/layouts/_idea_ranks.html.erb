@@ -8,6 +8,7 @@
 		<% @idea.ranks.each do |rank| %>
 			<tr><td><%=rank.user.email%></td><td><%=rank.value%></td><td><%=rank.created_at%></tr>
 		<%end%>
+		<tr><td></td><td><%=@idea.sum_of_ranks%></td><td></td></tr>
 	</tbody>
 
 </table>
