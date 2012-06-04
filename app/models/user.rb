@@ -1,17 +1,3 @@
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :ideas
-  has_many :ranks
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
-end
 # == Schema Information
 #
 # Table name: users
@@ -30,4 +16,39 @@ end
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
 #
+
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :ideas
+  has_many :ranks
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  # attr_accessible :title, :body
+
+  def get_available_rank_values
+
+  	# Each user is only allowed ranks 1-10 on the following Statuses: "Active", "Analysis", and "Ready"
+
+  	# this works, but seems amazingly clunky to me.
+
+  	@ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready")')
+
+  	@values = [1,2,3,4,5,6,7,8,9,10]
+
+  	@ranks.each do |rank| 
+  		@values.delete(rank.value)
+    end
+
+    return @values
+
+  end
+
+end
+
 

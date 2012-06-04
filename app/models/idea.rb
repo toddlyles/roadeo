@@ -12,7 +12,7 @@
 #
 
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :priority, :pitch
+  attr_accessible :title, :priority, :pitch, :status
 
   belongs_to :user, inverse_of: :ideas
   has_many :ranks
@@ -27,7 +27,7 @@ class Idea < ActiveRecord::Base
 
   validates :user, presence: true
 
-
+  validates :status, presence: true
 
   def sum_of_ranks
   	

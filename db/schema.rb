@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120603135137) do
+ActiveRecord::Schema.define(:version => 20120604123145) do
 
   create_table "ideas", :force => true do |t|
     t.string   "title"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20120603135137) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "ranks", ["user_id", "idea_id"], :name => "index_ranks_on_user_id_and_idea_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

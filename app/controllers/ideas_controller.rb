@@ -28,6 +28,10 @@ class IdeasController < ApplicationController
     # the process below results in User ID getting written to the Idea record during creation...yay!
     @user = current_user
   	@idea = @user.ideas.new(params[:idea])
+
+    # set the status of new Ideas to "Active"
+    @idea.status = "Active"
+
   	if @idea.save
       flash.now[:success] = "Saved."
   	  render 'show'
@@ -58,7 +62,6 @@ class IdeasController < ApplicationController
   	redirect_to ideas_path
   end
 
-  #CUSTOM ACTIONS
 
 
 end
