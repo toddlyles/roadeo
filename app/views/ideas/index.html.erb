@@ -2,11 +2,11 @@
 
 <table class="table table-striped table-bordered table-condensed">
 	<thead>
-			<tr><td>Idea</td><td>User Submitted</td><td>Submitted On</td><td>Sum of Ranks </td></tr>
+			<tr><td>Idea</td><td>User Submitted</td><td>Submitted On</td><td>Average Rank</td></tr>
 	</thead>
 	<tbody>
 		<% @ideas.each do |idea| %>
-			<tr><td><%=link_to idea.title, idea %></td><td><%=idea.user.email%></td><td><%=idea.created_at%></td><td><%=idea.sum_of_ranks%></td></tr>
+			<tr><td><%=link_to idea.title, idea %></td><td><%=idea.user.email%></td><td><%=idea.created_at%></td><td><%=idea.average_rank%>  (After <%=idea.ranks.count%> votes)</td></tr>
 		<%end%>
 	</tbody>
 

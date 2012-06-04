@@ -1,0 +1,13 @@
+<h6 class="center">Your Rankings</h6>
+<br>
+<table class="table table-striped table-bordered table-condensed">
+	<thead>
+			<tr><td>Idea</td><td>Rank Value</td><td>Date</td>
+	</thead>
+	<tbody>
+		<% current_user.get_rankings.each do |rank| %>
+			<tr><td><%=link_to rank.idea.title, rank.idea%></td><td><%=rank.value%></td><td><%=rank.created_at%></tr>
+		<%end%>
+	</tbody>
+
+</table>

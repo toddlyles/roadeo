@@ -29,7 +29,9 @@ class Idea < ActiveRecord::Base
 
   validates :status, presence: true
 
-  def sum_of_ranks
+
+
+  def average_rank
   	
   	@ranks = self.ranks
   	@sum_of_ranks = 0
@@ -38,8 +40,15 @@ class Idea < ActiveRecord::Base
   		@sum_of_ranks += rank.value
     end
 
-  	return @sum_of_ranks
+  	return @sum_of_ranks/ranks.count
 
   end 
+
+
+  #def current_user_has_ranked_already?(user_id)
+
+  #	return Rank.joins(:idea).where(:user_id => user_id).exists?
+
+  #end
 
 end
