@@ -29,8 +29,8 @@ class IdeasController < ApplicationController
     @user = current_user
   	@idea = @user.ideas.new(params[:idea])
 
-    # set the status of new Ideas to "Active"
-    @idea.status = "Active"
+    #new Ideas have a default status_id of "1" or Active...not sure how to do this neatly
+    @idea.status_id = 1
 
   	if @idea.save
       flash.now[:success] = "Saved."

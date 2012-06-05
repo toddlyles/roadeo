@@ -12,10 +12,11 @@
 #
 
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :priority, :pitch, :status
+  attr_accessible :title, :priority, :pitch
 
   belongs_to :user, inverse_of: :ideas
   has_many :ranks
+  belongs_to :status
 
   validates :title, length: {:in => 5..50, 
   			too_long: "must be fewer than 50 characters.",  
@@ -26,9 +27,6 @@ class Idea < ActiveRecord::Base
   			too_short: "must have at least 20 characters."}
 
   validates :user, presence: true
-
-  validates :status, presence: true
-
 
 
   def average_rank

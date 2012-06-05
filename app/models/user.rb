@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :ideas
   has_many :ranks
 
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
@@ -38,7 +39,15 @@ class User < ActiveRecord::Base
 
   	# this works, but seems amazingly clunky to me.
 
-  	@ranks = self.ranks.joins(:idea).where('status in (select distinct status from ideas where status in ("Active","Analysis","Ready"))')
+  	#@ranks = self.ranks.joins(:idea).joins(:status).where('category = "Rankable"')
+
+  	@ranks = self.ranks
+
+  	@ranks.each do |rank|
+  		if rank.idea.status.category != "Rankable"
+  			@ranks.delete(rank)
+  		end
+  	end
 
   	@values = (1..10).collect{|i| i}
 
@@ -54,7 +63,14 @@ class User < ActiveRecord::Base
 
   	@output = Array.new
 
-  	@ranks = self.ranks.joins(:idea).where('status in (select distinct status from ideas where status in ("Active","Analysis","Ready"))')
+  	@ranks = self.ranks
+
+  	@ranks.each do |rank|
+  		if rank.idea.status.category != "Rankable"
+  			@ranks.delete(rank)
+  		end
+  	end
+  	
   	@ranks = @ranks.sort_by! {|rank| rank.value}
 
   	@values = (1..10).collect{|i| i}
