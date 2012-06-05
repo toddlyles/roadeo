@@ -97,7 +97,7 @@ class User < ActiveRecord::Base
   	@ranks = self.ranks.includes(:idea).joins(:idea).where('status in ("Active","Analysis","Ready")')
   	@ranks = @ranks.sort_by! {|rank| rank.value}
 
-  	return @ranks
+  	#return @ranks
 
   end
 
@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   			end
 
   			#save your work
-  			rank.transaction do
+  			#rank.transaction do
   				rank.save
   				if @switch_places
   					if @go_ahead_and_delete_it
@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
   						@unlucky_rank.save
   					end
   				end
-  			end
+  			#end
   		end
   	end
 

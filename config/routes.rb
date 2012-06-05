@@ -12,6 +12,7 @@ Roadeo::Application.routes.draw do
 
   resources :ideas
   resources :ranks
+  match '/move', to:'ranks#move'
 
   match '/list',to: 'ideas#index'
 
