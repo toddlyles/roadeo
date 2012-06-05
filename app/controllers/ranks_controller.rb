@@ -31,6 +31,18 @@ class RanksController < ApplicationController
 
   end
 
+  def update
+    @user = current_user
+    
+    if params[:direction]=="up" 
+      @user.nudge_rank_up(params[:this_idea_id])
+    else
+    end
+
+    redirect_to :controller=>"ideas",:action=>"show", :id=>params[:return_to_idea_id]
+
+  end
+
   def destroy
   end
 

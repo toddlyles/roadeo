@@ -103,11 +103,19 @@ class User < ActiveRecord::Base
 
 
   def rank_idea(idea_to_vote_on_id, rank_value)
-  	#basic voting method
+  	#basic voting method - changed to be an UPSERT
 
   	@idea = Idea.find_by_id(idea_to_vote_on_id)
 
-  	@idea.ranks.create(user_id:self.id,value:rank_value) 
+  	@preexisting_rank = @idea.ranks.find_by_user_id(self.id)
+
+  	#check to see if this user has already ranked--
+  	if @preexisting_rank.nil?
+  		@idea.ranks.create(user_id:self.id,value:rank_value) 
+  	else
+  		@preexisting_rank.value = rank_value
+  		@preexisting_rank.save
+  	end 
 
   end
 
