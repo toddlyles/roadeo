@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   	# this works, but seems amazingly clunky to me.
 
-  	@ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready")')
+  	@ranks = self.ranks.joins(:idea).where('status in (select distinct status from idea where status in ("Active","Analysis","Ready"))')
 
   	@values = (1..10).collect{|i| i}
 
