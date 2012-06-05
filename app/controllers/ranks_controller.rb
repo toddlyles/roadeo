@@ -7,15 +7,30 @@ class RanksController < ApplicationController
   #end
 
   def index
-    @ranks = Rank.all
   end
 
   def show
   end
 
   def create
+
+    @user = current_user
+    #@rank = user.rank.new(params[:rank])
+
+    @user.rank_idea(params[:idea_id], params[:value])
+
+    #if @rank.save
+     # flash.now[:success] = "Saved."
+      #render 'idea/show'
+    #else
+      #flash.now[:error] = "Errors were found: #{@idea.errors.full_messages.each do |msg| (puts msg) end}" 
+      #render 'idea/show'
+    #end
+
   end
 
   def destroy
   end
+
+
 end

@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   	@ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready")')
 
-  	@values = [1,2,3,4,5,6,7,8,9,10]
+  	@values = (1..10).collect{|i| i}
 
   	@ranks.each do |rank| 
   		@values.delete(rank.value)
@@ -49,6 +49,48 @@ class User < ActiveRecord::Base
     return @values
 
   end
+
+  def get_all_rank_slots
+
+  	@output = Array.new
+
+  	@ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready")')
+  	@ranks = @ranks.sort_by! {|rank| rank.value}
+
+  	@values = (1..10).collect{|i| i}
+  	@found = false
+
+	@values.each do |i| 
+		@ranks.each do |rank|
+			if rank.value == i
+				@output.push(rank)
+				@found = true
+			end
+		end
+		if @found == false
+			@output.push(i)
+		end
+		@found = false
+    end
+
+    return @output
+
+  end
+
+
+  #def has_used_this_rank?(rank_value)
+  	
+  #	return @ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready") and value = ?',rank_value).exists?
+
+  #end
+
+
+  #def get_rank(rank_value)
+ 
+  #	return  self.ranks.includes(:idea).joins(:idea).where('status in ("Active","Analysis","Ready") and value = ?',rank_value)
+ 
+  #end
+
 
   def get_rankings
 
@@ -60,7 +102,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def vote(idea_to_vote_on_id, rank_value)
+  def rank_idea(idea_to_vote_on_id, rank_value)
   	#basic voting method
 
   	@idea = Idea.find_by_id(idea_to_vote_on_id)
@@ -70,12 +112,12 @@ class User < ActiveRecord::Base
   end
 
 
-  def nudge_up(idea_to_nudge_id)
+  def nudge_rank_up(idea_to_nudge_id)
   	#reduces the idea's rank with the user in question, switching places with anything ranked above it
 
   	@your_current_rankings = self.get_rankings
   	@switch_places = false
-
+  	
   	@your_current_rankings.each do |rank|
   		if rank.idea_id == idea_to_nudge_id
   		
@@ -95,7 +137,6 @@ class User < ActiveRecord::Base
 
 	  		#lower the poor bastard above it
   			if @switch_places
-  				# NEED TO ADD A CHECK TO SEE IF IT REACHES 11
   				@unlucky_rank.value +=1
   			end
 
@@ -103,16 +144,19 @@ class User < ActiveRecord::Base
   			rank.transaction do
   				rank.save
   				if @switch_places
-  					@unlucky_rank.save
+  					if @go_ahead_and_delete_it
+  						@unlucky_rank.delete
+  					else
+  						@unlucky_rank.save
+  					end
   				end
   			end
-
   		end
   	end
 
   end
 
-  def nudge_down(idea_to_nudge_id)
+  def nudge_rank_down(idea_to_nudge_id)
   	#lowers the idea's rank with the user in question, pushing other item's lower, and potentially "losing" #10
   end
 
