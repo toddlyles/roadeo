@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
 
   	@output = Array.new
 
-  	@ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready")')
+  	@ranks = self.ranks.joins(:idea).where('status in (select distinct status from idea where status in ("Active","Analysis","Ready"))')
   	@ranks = @ranks.sort_by! {|rank| rank.value}
 
   	@values = (1..10).collect{|i| i}
