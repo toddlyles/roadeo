@@ -19,6 +19,8 @@ class RanksController < ApplicationController
 
     @user.rank_idea(params[:idea_id], params[:value])
 
+    redirect_to :controller=> "ideas", :action=>"show", :id =>params[:idea_id]
+
     #if @rank.save
      # flash.now[:success] = "Saved."
       #render 'idea/show'

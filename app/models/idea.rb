@@ -40,8 +40,11 @@ class Idea < ActiveRecord::Base
   		@sum_of_ranks += rank.value
     end
 
-  	return @sum_of_ranks/ranks.count
-
+    if ranks.count != 0
+		return @sum_of_ranks/ranks.count
+	else
+		return 10
+	end 
   end 
 
 

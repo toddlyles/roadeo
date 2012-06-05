@@ -14,7 +14,7 @@
 
 			<%else%>
 
-				<tr><td></td><td><%="Available Rank #{slot.to_i}"%></td><td></td><td></td></tr>
+				<tr><td></td><td><%=link_to "Available Rank #{slot.to_i}",   {:controller=>"ranks", :idea_id=>@idea.id, :value=>slot.to_i}, :method=>:post%></td><td></td><td></td></tr>
 
 			<%end%>
 
