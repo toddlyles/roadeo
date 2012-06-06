@@ -10,7 +10,7 @@
 
 			<% if slot.is_a?(Rank) %>
 
-				<tr><td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :this_idea_id=>slot.idea_id, :direction=>"up", :return_to_idea_id=>@idea.id}, :method=>:put%></td><td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%></tr>
+				<tr><td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=>@idea.id}, :method=>:put%><%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%></td><td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%></tr>
 
 			<%else%>
 

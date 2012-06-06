@@ -110,7 +110,14 @@ class User < ActiveRecord::Base
 
   def get_rankings
 
-  	@ranks = self.ranks.includes(:idea).joins(:idea).where('status in ("Active","Analysis","Ready")')
+  	@ranks = self.ranks
+
+    @ranks.each do |rank|
+      if rank.idea.status.category != "Rankable"
+        @ranks.delete(rank)
+      end
+    end
+
   	@ranks = @ranks.sort_by! {|rank| rank.value}
 
   	#return @ranks
@@ -136,53 +143,45 @@ class User < ActiveRecord::Base
   end
 
 
-  def nudge_rank_up(idea_to_nudge_id)
-  	#reduces the idea's rank with the user in question, switching places with anything ranked above it
+  def nudge_rank_upward(rank_id)
 
-  	@your_current_rankings = self.get_rankings
-  	@switch_places = false
-  	
-  	@your_current_rankings.each do |rank|
-  		if rank.idea_id == idea_to_nudge_id
-  		
-  			#you've found it in the array--now is the slot above it occupied?
-  			@your_current_rankings.each do |other_rank|
-  				if rank.value-1 == other_rank.value
-  					#uh-oh...the next rank is occupied...need to switch places
-  					@switch_places = true
-  					@unlucky_rank = other_rank
-  				end
-  			end
+    @rank = Rank.find_by_id(rank_id)
 
-  			#elevate the rank
-  			if rank.value != 1
-	  			rank.value -= 1
-	  		end
+    @rank_above = self.ranks.find_by_value(@rank.value-1)
 
-	  		#lower the poor bastard above it
-  			if @switch_places
-  				@unlucky_rank.value +=1
-  			end
-
-  			#save your work
-  			#rank.transaction do
-  				rank.save
-  				if @switch_places
-  					if @go_ahead_and_delete_it
-  						@unlucky_rank.delete
-  					else
-  						@unlucky_rank.save
-  					end
-  				end
-  			#end
-  		end
-  	end
+    @rank.transaction do
+      if @rank_above.nil? == false then 
+        #switch
+        @rank.value -=1
+        @rank_above.value +=1
+        @rank.save
+        @rank_above.save
+      else
+        @rank.value -=1
+        @rank.save
+      end
+    end
 
   end
 
-  def nudge_rank_down(idea_to_nudge_id)
-  	#lowers the idea's rank with the user in question, pushing other item's lower, and potentially "losing" #10
-  end
+
+  def nudge_rank_downward(rank_id)
+    @rank = Rank.find_by_id(rank_id)
+
+    @rank_below = self.ranks.find_by_value(@rank.value+1)
+
+    @rank.transaction do
+      if @rank_above.nil? == false then 
+        #switch
+        @rank.value +=1
+        @rank_below.value -=1
+        @rank.save
+        @rank_below.save
+      else
+        @rank.value +=1
+        @rank.save
+      end
+    end  end
 
 end
 

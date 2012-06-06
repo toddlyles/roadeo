@@ -11,6 +11,7 @@ group :development, :test do
 	gem 'rspec-rails','2.10.0'
 	gem 'annotate'
 	gem 'will_paginate','3.0.3'
+	gem 'ruby-debug19'
 end
 
 group :test do
