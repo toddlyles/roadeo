@@ -50,6 +50,13 @@ class RanksController < ApplicationController
   end
 
   def destroy
+
+    @rank = Rank.find_by_id(params[:rank_id])
+
+    @rank.destroy
+
+    redirect_to :controller=>"ideas",:action=>"show", :id=>params[:return_to_idea_id]
+  
   end
 
 

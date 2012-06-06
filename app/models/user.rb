@@ -171,7 +171,7 @@ class User < ActiveRecord::Base
     @rank_below = self.ranks.find_by_value(@rank.value+1)
 
     @rank.transaction do
-      if @rank_above.nil? == false then 
+      if @rank_below.nil? == false then 
         #switch
         @rank.value +=1
         @rank_below.value -=1
