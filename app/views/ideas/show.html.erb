@@ -1,20 +1,39 @@
-<h3><%= @idea.title %></h3><br>
-<div class="span6">
-		<h6>Submitted By</h6>
-		<p><%= @idea.user.email %></p>
-		<h6>Submitted On</h6>
-		<p><%= @idea.created_at%></p>
-		More Issue Stats will go here
-		<hr>
-		<h6>The Pitch</h6>
-		<p><%= @idea.pitch %></p>
+<div class="container-fluid">
+<div class="row-fluid">
+	
+
+
+		<div class="row-fluid">
+			<div class="span1">
+				<% if @idea.ranks.count != 0 %>
+					<span class="hero-number"># <%=@idea.average_rank%></span> 
+					<h6 class="center">Average Rank</h6>
+				<%end%>
+			</div>
+
+			<div class="span6">
+			
+				<h3>
+					<%= @idea.title %>
+				</h3>
+				<br>
+				<h6>Submitted By</h6>
+				<p><%= @idea.user.email %></p>
+				<h6>Submitted On</h6>
+				<p><%= @idea.created_at%></p>
+				More Issue Stats will go here
+				<hr>
+				<h6>The Pitch</h6>
+				<p><%= @idea.pitch %></p>
+			</div>
+
+			<div class="span5">
+				<%= render 'layouts/user_ranks' %>
+			</div>
+		</div>
+
 </div>
-
-<div class="span6">
-
-		<%= render 'layouts/user_ranks' %>
 </div>
-
 
 
 

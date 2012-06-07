@@ -30,6 +30,8 @@ class Idea < ActiveRecord::Base
 
 
   def average_rank
+
+    # The average Rank this Idea has received
   	
   	@ranks = self.ranks
   	@sum_of_ranks = 0
@@ -44,6 +46,24 @@ class Idea < ActiveRecord::Base
 		return 10
 	end 
   end 
+
+  def standing
+
+    # Get all ideas...ugh this seems tedious
+    @ideas = Idea.all
+
+    # Only look at rankable ideas
+    @ideas.each do |idea|
+      if idea.status.category != "Rankable"
+        @ideas.delete(idea)
+      end
+    end
+
+    @ideas.sort! {|a,b| a.average_rank <=> b.average_rank}
+
+
+  end
+
 
 
   #def current_user_has_ranked_already?(user_id)
