@@ -16,6 +16,8 @@ class Idea < ActiveRecord::Base
 
   belongs_to :user, inverse_of: :ideas
   has_many :ranks
+
+  #there isn't a single tutorial online that says it should work this way
   belongs_to :status
 
   validates :title, length: {:in => 5..50, 
@@ -47,23 +49,7 @@ class Idea < ActiveRecord::Base
 	end 
   end 
 
-  def standing
-
-    # Get all ideas...ugh this seems tedious
-    @ideas = Idea.all
-
-    # Only look at rankable ideas
-    @ideas.each do |idea|
-      if idea.status.category != "Rankable"
-        @ideas.delete(idea)
-      end
-    end
-
-    @ideas.sort! {|a,b| a.average_rank <=> b.average_rank}
-
-
-  end
-
+  
 
 
   #def current_user_has_ranked_already?(user_id)

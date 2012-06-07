@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :ideas
   has_many :ranks
-
+  belongs_to :role
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
