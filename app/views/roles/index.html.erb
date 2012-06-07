@@ -1,2 +1,13 @@
-<h1>Roles#index</h1>
-<p>Find me in app/views/roles/index.html.erb</p>
+<h2>User Roles</h2>
+
+<table class="table table-striped table-bordered table-condensed">
+	<thead>
+			<tr><td>Role</td></tr>
+	</thead>
+	<tbody>
+		<% @roles.each do |role| %>
+			<tr><td><%=role.name%></td></tr>
+		<%end%>
+	</tbody>
+
+</table>

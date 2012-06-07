@@ -1,19 +1,4 @@
 Roadeo::Application.routes.draw do
- 
-
-  get "roles/new"
-
-  get "roles/edit"
-
-  get "roles/index"
-
-  get "roles/show"
-
-  get "roles/create"
-
-  get "roles/update"
-
-  get "roles/destroy"
 
   root to: 'static_pages#home'
 
@@ -25,6 +10,9 @@ Roadeo::Application.routes.draw do
   end
 
   resources :ideas
+
+  resources :roles
+
   resources :ranks
   match '/move', to:'ranks#move'
 
