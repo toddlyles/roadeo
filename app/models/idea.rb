@@ -43,19 +43,61 @@ class Idea < ActiveRecord::Base
     end
 
     if ranks.count != 0
-		return @sum_of_ranks/ranks.count
-	else
-		return 10
-	end 
+	   	return @sum_of_ranks/ranks.count
+	   else
+		  return 10
+	   end 
+
+
+end 
+
+# Idea Rank Calculations
+def average_rank
+  if total_rank_value !=0
+    return total_rank_value/count_of_users_ranked
+  else
+    return 10
+  end
+end
+
+def total_rank_value
+  return self.ranks.select(:value).sum("value")
+end
+
+
+def count_of_users_ranked
+  return self.ranks.select(:user_id).uniq.count("user_id")
+end
+
+#BAYESIAN AVERAGE
+
+# BR = ((C*avg_rating) + (this_num_votes*this_rating))/(C+this_num_votes)
+
+def bayesian_rank
+
+#this is an ad hoc value, which basically represents the minimum number of 
+#votes we think an Idea should have before it's even considered relevant.  
+#eventually this value will come from the admin screen
+@magic_number_of_votes = 3
+
+((@magic_number_of_votes*Idea.average_rank_of_all_ideas)+(self.count_of_users_ranked*self.average_rank))/(@magic_number_of_votes+self.count_of_users_ranked)
+
+
+end
+
+
+#CLASS METHODS
+
+def self.average_rank_of_all_ideas
+  @sum = Idea.joins(:status).joins(:ranks).includes(:ranks).where(:statuses=>{:category=>'Rankable'}).sum(:value)
+  @count = Idea.joins(:status).joins(:ranks).includes(:ranks).where(:statuses=>{:category=>'Rankable'}).count(:value)
+  if @sum !=0 || @count !=0
+    return @sum/@count
+  else
+    return 0
   end 
+end
 
-  
 
-
-  #def current_user_has_ranked_already?(user_id)
-
-  #	return Rank.joins(:idea).where(:user_id => user_id).exists?
-
-  #end
 
 end
