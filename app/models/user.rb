@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_id
   # attr_accessible :title, :body
 
   def get_available_rank_values
@@ -43,11 +43,13 @@ class User < ActiveRecord::Base
 
   	@ranks = self.ranks
 
-  	@ranks.each do |rank|
-  		if rank.idea.status.category != "Rankable"
-  			@ranks.delete(rank)
-  		end
-  	end
+  	 #The following is now irrelevant, as I'm going to wipe our ranks
+    #when the Idea goes to an unrankable state
+    #@ranks.each do |rank|
+    # if rank.idea.status.category != "Rankable"
+    #   @ranks.delete(rank)
+    # end
+    #end
 
   	@values = (1..10).collect{|i| i}
 
@@ -65,11 +67,13 @@ class User < ActiveRecord::Base
 
   	@ranks = self.ranks
 
-  	@ranks.each do |rank|
-  		if rank.idea.status.category != "Rankable"
-  			@ranks.delete(rank)
-  		end
-  	end
+    #The following is now irrelevant, as I'm going to wipe our ranks
+    #when the Idea goes to an unrankable state
+  	#@ranks.each do |rank|
+  	#	if rank.idea.status.category != "Rankable"
+  	#		@ranks.delete(rank)
+  	#	end
+  	#end
   	
   	@ranks = @ranks.sort_by! {|rank| rank.value}
 

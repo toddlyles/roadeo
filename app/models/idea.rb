@@ -12,7 +12,7 @@
 #
 
 class Idea < ActiveRecord::Base
-  attr_accessible :title, :priority, :pitch
+  attr_accessible :title, :pitch, :status_id
 
   belongs_to :user, inverse_of: :ideas
   has_many :ranks
@@ -20,8 +20,8 @@ class Idea < ActiveRecord::Base
   #there isn't a single tutorial online that says it should work this way
   belongs_to :status
 
-  validates :title, length: {:in => 5..50, 
-  			too_long: "must be fewer than 50 characters.",  
+  validates :title, length: {:in => 5..100, 
+  			too_long: "must be fewer than 100 characters.",  
   			too_short: "must be at least 5 characters."}
 
   validates :pitch, length: {:in => 20..500,
