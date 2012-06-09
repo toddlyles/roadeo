@@ -34,22 +34,7 @@ class User < ActiveRecord::Base
 
   def get_available_rank_values
 
-  	# Each user is only allowed ranks 1-10 on the following Statuses: "Active", "Analysis", and "Ready"
-  	# Once an item goes to Tabled, Working, or Finished I will need a way to clear ranks without losing history
-
-  	# this works, but seems amazingly clunky to me.
-
-  	#@ranks = self.ranks.joins(:idea).joins(:status).where('category = "Rankable"')
-
   	@ranks = self.ranks
-
-  	 #The following is now irrelevant, as I'm going to wipe our ranks
-    #when the Idea goes to an unrankable state
-    #@ranks.each do |rank|
-    # if rank.idea.status.category != "Rankable"
-    #   @ranks.delete(rank)
-    # end
-    #end
 
   	@values = (1..10).collect{|i| i}
 
@@ -64,52 +49,27 @@ class User < ActiveRecord::Base
   def get_all_rank_slots
 
   	@output = Array.new
-
   	@ranks = self.ranks
-
-    #The following is now irrelevant, as I'm going to wipe our ranks
-    #when the Idea goes to an unrankable state
-  	#@ranks.each do |rank|
-  	#	if rank.idea.status.category != "Rankable"
-  	#		@ranks.delete(rank)
-  	#	end
-  	#end
-  	
   	@ranks = @ranks.sort_by! {|rank| rank.value}
-
   	@values = (1..10).collect{|i| i}
   	@found = false
 
-	@values.each do |i| 
-		@ranks.each do |rank|
-			if rank.value == i
-				@output.push(rank)
-				@found = true
-			end
-		end
-		if @found == false
-			@output.push(i)
-		end
-		@found = false
+  	@values.each do |i| 
+  		@ranks.each do |rank|
+  			if rank.value == i
+  				@output.push(rank)
+  				@found = true
+  			end
+  		end
+  		if @found == false
+  			@output.push(i)
+  		end
+  	@found = false
     end
 
     return @output
 
   end
-
-
-  #def has_used_this_rank?(rank_value)
-  	
-  #	return @ranks = self.ranks.joins(:idea).where('status in ("Active","Analysis","Ready") and value = ?',rank_value).exists?
-
-  #end
-
-
-  #def get_rank(rank_value)
- 
-  #	return  self.ranks.includes(:idea).joins(:idea).where('status in ("Active","Analysis","Ready") and value = ?',rank_value)
- 
-  #end
 
 
   def get_rankings
@@ -123,8 +83,6 @@ class User < ActiveRecord::Base
     end
 
   	@ranks = @ranks.sort_by! {|rank| rank.value}
-
-  	#return @ranks
 
   end
 

@@ -21,14 +21,6 @@ class RanksController < ApplicationController
     
     redirect_to :controller=> "ideas", :action=>"show", :id =>params[:idea_id]
 
-    #if @rank.save
-     # flash.now[:success] = "Saved."
-      #render 'idea/show'
-    #else
-      #flash.now[:error] = "Errors were found: #{@idea.errors.full_messages.each do |msg| (puts msg) end}" 
-      #render 'idea/show'
-    #end
-
   end
 
   def move
