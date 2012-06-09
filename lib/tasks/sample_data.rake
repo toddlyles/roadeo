@@ -4,7 +4,7 @@ namespace :db do
   task populate: :environment do
     @admin_role = 3
     @agent_role = 1
-    @active_status = 1
+    
 
    
       User.create!(email: "admin@example.com",
@@ -25,6 +25,7 @@ namespace :db do
   
 
   task ideate: :environment do
+      @active_status = 1
       users = User.all
       
       # Create a bunch of Ideas
@@ -43,13 +44,21 @@ namespace :db do
       
       users.each do |user| 
         # I was doing this in one line, but it kept complaining about unexpected tlabels and BS like that
-        @new_rank = user.ranks.new
+        new_rank = user.ranks.new
+        new_rank.value = rand 1..5
+        
+        new_rank.idea_id = rand 1..last_idea
+      
+        preexisting_rank = Rank.find_by_user_id(user.id)
 
-        @new_rank.transaction do
-          @new_rank.idea_id = rand 1..last_idea
-          @new_rank.value = rand 1..10
-          @new_rank.save
+        if preexisting_rank != nil
+          if preexisting_rank.idea_id != new_rank.idea_id
+            new_rank.save
+          end
+        else
+          new_rank.save
         end
+
      end
   end
 

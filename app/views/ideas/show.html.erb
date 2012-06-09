@@ -6,8 +6,8 @@
 		<div class="row-fluid">
 			<div class="span1">
 				<% if @idea.ranks.count != 0 %>
-					<span class="hero-number"># <%=@idea.average_rank%></span> 
-					<h6 class="center">Average Rank</h6>
+					<span class="hero-number center"><%=@idea.bayesian_rank%></span> 
+					<h6 class="center">Weighted Rank</h6>
 				<%end%>
 			</div>
 

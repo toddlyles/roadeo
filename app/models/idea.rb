@@ -78,10 +78,17 @@ def bayesian_rank
 #this is an ad hoc value, which basically represents the minimum number of 
 #votes we think an Idea should have before it's even considered relevant.  
 #eventually this value will come from the admin screen
-@magic_number_of_votes = 3
+@magic_number_of_votes = 0.5
 
-((@magic_number_of_votes*Idea.average_rank_of_all_ideas)+(self.count_of_users_ranked*self.average_rank))/(@magic_number_of_votes+self.count_of_users_ranked)
 
+
+@return_value = ((@magic_number_of_votes*Idea.average_rank_of_all_ideas.to_f)+(self.count_of_users_ranked*self.average_rank.to_f))/(@magic_number_of_votes+self.count_of_users_ranked)
+
+if @return_value == 0
+  return 10
+else
+  return @return_value.round(2)
+end
 
 end
 
@@ -91,8 +98,8 @@ end
 def self.average_rank_of_all_ideas
   @sum = Idea.joins(:status).joins(:ranks).includes(:ranks).where(:statuses=>{:category=>'Rankable'}).sum(:value)
   @count = Idea.joins(:status).joins(:ranks).includes(:ranks).where(:statuses=>{:category=>'Rankable'}).count(:value)
-  if @sum !=0 || @count !=0
-    return @sum/@count
+  if @sum.to_i !=0 || @count.to_i !=0
+    return @sum.to_i/@count.to_i
   else
     return 0
   end 
