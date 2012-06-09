@@ -45,9 +45,13 @@ namespace :db do
       users.each do |user| 
         # I was doing this in one line, but it kept complaining about unexpected tlabels and BS like that
         new_rank = user.ranks.new
-        new_rank.value = rand 1..5.to_i
         
-        new_rank.idea_id = rand 1..last_idea.to_i
+        #These worked fine locally, but bombed on heroku
+        #new_rank.value = rand 1..5.to_i
+        #new_rank.idea_id = rand 1..last_idea.to_i
+
+        new_rank.value = Random.new.rand(1..5)
+        new_rank.idea_id = Random.new.rand(1..last_idea)
       
         preexisting_rank = Rank.find_by_user_id(user.id)
 
