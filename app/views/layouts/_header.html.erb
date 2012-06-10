@@ -1,21 +1,20 @@
 <header class="navbar navbar-fixed-top">
 	<div class ="navbar-inner">
-
 		<div class="container-fluid">
+			<div class="row-fluid">
+				<%= link_to "roadeo","#",id:"logo" %>
 
-		<%= link_to "roadeo","#",id:"logo" %>
-			
-			<ul class="nav pull-right">
-				<%if user_signed_in? %>
-					<li><%=current_user.email%></li>
-					<li><%=link_to "Sign out", destroy_user_session_path%></li>
-				<%else%>
-					<li><%= link_to "Sign In",sign_in_path%></li>
-				<%end%>
-			</ul>
+				<ul class="nav pull-right">
+					<%if user_signed_in? %>
+						<li><p class="navbar-text">Logged in as <%=current_user.email%></p></li>
+						<li class="divider-vertical"></li>
+						<li><%=link_to "Sign out", destroy_user_session_path%></li>
+					<%else%>
+						<li><%= link_to "Sign In",sign_in_path%></li>
+					<%end%>
+				</ul>
 
+			</div>
 		</div>
-
-
 	</div>
 </header>
