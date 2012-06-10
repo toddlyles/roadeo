@@ -12,7 +12,6 @@ html{
 }
 
 body{
-	padding-top: 70px;
 	background-color:#e6e6e6;
 }
 
@@ -53,7 +52,6 @@ h2{
 	margin-bottom:30px;
 	text-align:center;
 	font-weight:normal;
-	color:$grayLight;
 }
 
 h3{
@@ -83,28 +81,25 @@ thead{
 	border:1px solid #4386e6;
 }
 
+
 .navbar{
-	background-color:#4386e6;
-	border-bottom: 3px solid #fff;
 	padding-bottom:3px;
-	li{
-		color:#fff;
-	}
+
 }
 
+.navbar-inner
+{
+  background: #4386e6 !important;  /*this is the only way I could change the color of navbar*/
+  li{
+  	color:red !important;
+  }
+}
 
-#logo{
-	float:left;
-	margin-left: 15px;
+.brand{
 	font-size:2em;
-	letter-spacing:1px;
-	padding-top:9px;
-	font-weight:bold;
+	letter-spacing:2px;
 	color:#fff;
 	line-height:1;
-	&:hover{
-		text-decoration:underline;
-	}
 }
 
 /*forms*/
