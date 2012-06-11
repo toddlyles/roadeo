@@ -2,6 +2,7 @@ Roadeo::Application.routes.draw do
 
   root to: 'static_pages#home'
 
+
   #devise_for :users
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
 
@@ -14,9 +15,13 @@ Roadeo::Application.routes.draw do
   resources :roles
 
   resources :ranks
+  
   match '/move', to:'ranks#move'
 
   match '/list',to: 'ideas#index'
+
+  match '/dashboard', to: 'static_pages#dashboard'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
