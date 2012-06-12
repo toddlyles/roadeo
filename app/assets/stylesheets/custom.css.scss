@@ -71,14 +71,14 @@ p{
 }
 
 thead{
-	background-color:#4386e6;
+	background-color:#666666;
 	font-weight:bold;
 	letter-spacing:1px;
 	color:#fff;
 }
 
 .table-bordered{
-	border:1px solid #4386e6;
+	border:1px solid #666666;
 }
 
 .nav-stacked{
@@ -100,7 +100,6 @@ thead{
 }
 
 .brand{
-	font-size:2em;
 	letter-spacing:2px;
 	color:#fff;
 	line-height:1;
@@ -395,16 +394,30 @@ thead{
 
 /*---------------*/
 
+/* Nav Tabs */
+
+.nav-tabs li{
+	background-color:none;
+}
+
+
+
 /*forms*/
 
 input,textarea,select .uneditable-input {
 	border:1px solid #bbb;
 	width: 100%;
-	padding: 10px;
+	padding: 5px;
 	height:auto;
 	margin-bottom: 15px;
 	@include box_sizing;
+  vertical-align:baseline;
 }
+
+label{
+  margin-bottom:0;
+}
+
 
 #error_explanation {
 	color: #f00;
