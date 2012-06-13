@@ -48,25 +48,26 @@ class User < ActiveRecord::Base
 
   def get_all_rank_slots
 
-  	@output = Array.new
-  	@ranks = self.ranks
-  	@ranks = @ranks.sort_by! {|rank| rank.value}
-  	@values = (1..10).collect{|i| i}
-  	@found = false
+    @output = Array.new
+    @ranks = self.ranks
+    puts "-------> self.ranks: #{@ranks}"
+    @ranks = @ranks.sort_by! {|rank| rank.value}
+    @values = (1..10).collect{|i| i}
+    @found = false
 
-  	@values.each do |i| 
-  		@ranks.each do |rank|
-  			if rank.value == i
-  				@output.push(rank)
-  				@found = true
-  			end
-  		end
-  		if @found == false
-  			@output.push(i)
-  		end
-  	@found = false
+    @values.each do |i|
+      @ranks.each do |rank|
+        if rank.value == i
+          @output.push(rank)
+          @found = true
+        end
+      end
+      if @found == false
+        @output.push(i)
+      end
+      @found = false
     end
-
+    puts "-----------> @output: #{@output}"
     return @output
 
   end
