@@ -1,43 +1,58 @@
 <table class="table table-striped table-bordered table-condensed">
-	<thead>
-			<tr><td></td><td>Your Current Rankings</td><td>Rank</td><td>Date</td><td></td></tr>
-	</thead>
-	<tbody>
+  <thead>
+    <tr><td></td><td>Your Current Rankings</td><td>Rank</td><td>Date</td><td></td></tr>
+  </thead>
+  <tbody>
+    <% current_user.get_all_rank_slots.each do |slot| %>
+    <% if slot.is_a?(Rank) %>
+    <tr>
+      <% case slot.value when 1 %>
+      <td>
+        <%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%>
+      </td>
+      <% when 10%>
+      <td>
+        <%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%>
+      </td>
+      
+      <%else%>
+      
+      <td>
+        <%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%> <%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%>
+      </td>
+      
+      <%end%>
+      
+      <td>
+          <%=link_to slot.idea.title, slot.idea%>
+      </td>
+      <td>
+        <%=slot.value%>
+      </td>
+      <td>
+        <%=slot.updated_at.to_formatted_s(:short)%>
+      </td>
+      <td>
+        <%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),   {:controller=> "ranks", :action=>"destroy", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:delete%>
+      </td>
+    </tr>
 
-		<% current_user.get_all_rank_slots.each do |slot| %>
+    <%else%>
 
-			<% if slot.is_a?(Rank) %>
+    <tr>
+      <td>
+        <%=link_to raw('<i class="icon-check" title="Rank this Idea here!"></i>'),   {:controller=>"ranks", :idea_id=>@idea.id, :value=>slot.to_i}, :method=>:post%></td><td><%="Available Rank #{slot.to_i}"%>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
 
-				<tr>
+    <%end%>
 
-					<% case slot.value when 1 %>
-
-						<td><%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%></td>
-
-					  <% when 10%>
-
-					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%> </td>
-
-
-					  <%else%>
-
-					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%> <%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%></td>
+    <%end%>
 
 
-					<%end%>
-
-
-						<td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%><td><%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),   {:controller=> "ranks", :action=>"destroy", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:delete%></td></tr>
-
-			<%else%>
-
-				<tr><td><%=link_to raw('<i class="icon-check" title="Rank this Idea here!"></i>'),   {:controller=>"ranks", :idea_id=>@idea.id, :value=>slot.to_i}, :method=>:post%></td><td><%="Available Rank #{slot.to_i}"%></td><td></td><td></td><td></td></tr>
-
-			<%end%>
-
-		<%end%>
-
-
-	</tbody>
+</tbody>
 
 </table>
