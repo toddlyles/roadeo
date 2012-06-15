@@ -27,7 +27,7 @@
 					<%end%>
 
 
-						<td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%><td><%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),   {:controller=> "ranks", :action=>"destroy", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:delete%></td></tr>
+						<td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%><td><%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),{:controller=>"ranks", :action=>"destroy", :rank_id=>slot.id, :return_to_idea_id=> @idea.id}, :method=>:delete %></td></tr>
 
 			<%else%>
 
