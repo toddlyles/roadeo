@@ -12,22 +12,22 @@
 
 					<% case slot.value when 1 %>
 
-						<td><%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%></td>
+						<td><%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down"}, :method=>:put%></td>
 
 					  <% when 10%>
 
-					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%> </td>
+					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up"}, :method=>:put%> </td>
 
 
 					  <%else%>
 
-					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up", :return_to_idea_id=> @idea.id}, :method=>:put%> <%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down", :return_to_idea_id=>@idea.id}, :method=>:put%></td>
+					<td><%=link_to raw('<i class="icon-chevron-up" title="Shift Upward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"up"}, :method=>:put%> <%=link_to raw('<i class="icon-chevron-down" title="Shift Downward!"></i>'),   {:controller=> "ranks", :action=>"move", :rank_id=>slot.id, :direction=>"down"}, :method=>:put%></td>
 
 
 					<%end%>
 
 
-						<td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%><td><%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),{:controller=>"ranks", :action=>"destroy", :rank_id=>slot.id, :return_to_idea_id=> @idea.id}, :method=>:delete %></td></tr>
+						<td></i><%=link_to slot.idea.title, slot.idea%></td><td><%=slot.value%></td><td><%=slot.updated_at.to_formatted_s(:short)%><td><%=link_to raw('<i class="icon-trash" title="Delete this Ranking!"></i>'),{:controller=>"ranks", :action=>"destroy", :rank_id=>slot.id}, :method=>:delete %></td></tr>
 
 			<%else%>
 

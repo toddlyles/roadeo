@@ -19,7 +19,7 @@ class RanksController < ApplicationController
     
     @user.rank_idea(params[:idea_id], params[:value])
     
-    redirect_to :controller=> "ideas", :action=>"show", :id =>params[:idea_id]
+    redirect_to :back
 
   end
 
@@ -33,7 +33,7 @@ class RanksController < ApplicationController
       @user.nudge_rank_downward(params[:rank_id])
     end
 
-    redirect_to :controller=>"ideas",:action=>"show", :id=>params[:return_to_idea_id]
+    redirect_to :back
   end
 
 
@@ -47,8 +47,10 @@ class RanksController < ApplicationController
 
     @rank.destroy
 
-    redirect_to :controller=>"ideas",:action=>"show", :id=>params[:return_to_idea_id]
-  
+    #redirect_to :controller=>"ideas",:action=>"show", :id=>params[:return_to_idea_id]
+
+    redirect_to :back
+
   end
 
 
