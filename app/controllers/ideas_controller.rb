@@ -27,16 +27,18 @@ class IdeasController < ApplicationController
   def create
     # the process below results in User ID getting written to the Idea record during creation...yay!
     @user = current_user
-  	@idea = @user.ideas.new(params[:idea])
+    @idea = @user.ideas.new(params[:idea])
 
     #new Ideas have a default status_id of "1" or Active...not sure how to do this neatly
     @idea.status_id = 1
-
-  	if @idea.save
+    puts "---------> trying to save idea..."
+    if @idea.save
       flash.now[:success] = "Saved."
-  	  render 'show'
+      puts "----------> @idea.save succeeded"
+      render 'show'
     else
       flash.now[:error] = "Errors were found: #{@idea.errors.full_messages.each do |msg| (puts msg) end}" 
+      puts "----------> errors"
       render 'new'
     end
   end
