@@ -31,7 +31,13 @@
 
 			<%else%>
 
-				<tr><td><%=link_to raw('<i class="icon-check" title="Rank this Idea here!"></i>'),   {:controller=>"ranks", :idea_id=>@idea.id, :value=>slot.to_i}, :method=>:post%></td><td><%="Available Rank #{slot.to_i}"%></td><td></td><td></td><td></td></tr>
+				<%-# Added if logic so this layout could be used without an idea in scope -%>
+				<% if @idea.nil? %>
+					<tr><td></td><td><%="Available Rank #{slot.to_i}"%></td><td></td><td></td><td></td></tr>
+
+				<%else%>
+					<tr><td><%=link_to raw('<i class="icon-check" title="Rank this Idea here!"></i>'),   {:controller=>"ranks", :idea_id=>@idea.id, :value=>slot.to_i}, :method=>:post%></td><td><%="Available Rank #{slot.to_i}"%></td><td></td><td></td><td></td></tr>
+				<%end%>
 
 			<%end%>
 
