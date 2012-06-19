@@ -1,22 +1,18 @@
-<row class="span12">  
-    <div class="tabbable tabs-left">  
-        <ul class="nav nav-tabs">  
-            <li class="active"><a href="#1" data-toggle="tab">Your Rankings</a></li>  
-            <li class=""><a href="#2" data-toggle="tab">In Progress</a></li> 
-            <li class=""><a href="#3" data-toggle="tab">Tabled Items</a></li>  
-        </ul>  
+<row class="span12">
+    
+    <div class="span2">
+        <%= render 'layouts/dashboard_nav' %>
     </div>
-    <div class="tab-content">  
-            <div class="tab-pane active" id="1">  
-                <%= render 'layouts/user_ranks' %>
-            </div>  
-             <div class="tab-pane" id="2">  
-                <p>You are watching Section 2.</p>  
-             </div>  
-             <div class="tab-pane" id="3">  
-                <p>You are watching Section 3.</p>  
-            </div>  
-    </div>  
-</row>  
+
+    <div class="span4">
+        <%= render 'layouts/global_ranks' %>
+    </div>
+
+    <div class="span4">
+        <%= render 'layouts/user_ranks' %>
+    </div>
+
+ 
+</div>
 
  

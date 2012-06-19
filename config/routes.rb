@@ -22,6 +22,8 @@ Roadeo::Application.routes.draw do
 
   match '/dashboard', to: 'static_pages#dashboard'
 
+  match '/admin', to: 'static_pages#admin'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

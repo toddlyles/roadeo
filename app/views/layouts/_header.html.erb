@@ -5,8 +5,15 @@
 
 				<ul class="nav pull-right">
 					<%if user_signed_in? %>
-						<li><%=link_to "New Idea", new_idea_path%></li>
+						<li><%=link_to "Submit a New Idea", new_idea_path%></li><li class="divider-vertical"></li>
+						<li><%=link_to "Your Dashboard", dashboard_path%></li>
 						<li class="divider-vertical"></li>	
+
+						<%if current_user.role_id == 3%>
+							<li><%=link_to "Admin", admin_path%></li>
+							<li class="divider-vertical"></li>	
+						<%end%>
+
 						<li class="navbar-text">Logged in as <%=current_user.email%> - </li>
 						<li><%=link_to "Sign out", destroy_user_session_path%></li>
 					<%else%>

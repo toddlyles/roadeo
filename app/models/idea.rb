@@ -103,6 +103,14 @@ def self.average_rank_of_all_ideas
   end 
 end
 
+def self.get_global_top_10
+
+  @ideas = Idea.joins(:status).joins(:ranks).includes(:ranks).where(:statuses=>{:category=>'Rankable'}).all
+  @ideas = @ideas.sort_by! {|idea| idea.bayesian_rank}
+  @ideas = @ideas[0..9]
+
+end
+
 
 
 end

@@ -1,0 +1,15 @@
+<table class="table table-striped table-bordered table-condensed">
+	<thead>
+			<tr><td>#</td><td>Global Top 10</td><td>Status</td></tr>
+	</thead>
+	<tbody>
+
+		<% Idea.get_global_top_10.each_with_index do |idea,n| %>
+
+				<tr><td><%=n+1%></td><td></i><%=link_to idea.title, idea%></td><td><%=idea.status.name%></tr>
+		<%end%>
+
+
+	</tbody>
+
+</table>
