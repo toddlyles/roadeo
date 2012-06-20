@@ -1,15 +1,18 @@
 <ul class="nav nav-list pull-left">
-	<li class="nav-header">
+	
+  <%= render 'layouts/search_ideas'%>
+
+  <li class="nav-header">
     	Different Views
   	</li>
 	
-	<li><%= link_to 'Fresh Ideas', '#' %></li>
+	<li><%= link_to raw('<i class="icon-leaf"></i> Fresh Ideas'), '#' %></li>
 
-  <li><%= link_to 'Being Studied', '#' %></li>
+  <li><%= link_to raw('<i class="icon-eye-open"></i> Being Studied'), '#' %></li>
   
-  <li><%= link_to 'Tabled Ideas', '#' %></li>
+  <li><%= link_to raw('<i class="icon-folder-close"></i> Tabled Ideas'), '#' %></li>
 
-  <li><%= link_to 'In the Works', '#' %></li>
+  <li><%= link_to raw('<i class="icon-cog"></i> Working'), '#' %></li>
 
 	<li ><%= link_to 'All Ideas', ideas_path %></li>
 
