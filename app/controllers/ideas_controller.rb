@@ -18,6 +18,11 @@ class IdeasController < ApplicationController
     @ideas = @ideas.sort_by! {|idea| idea.bayesian_rank}
   end
 
+  def search
+
+  end
+
+
   def show
   	@idea = Idea.find(params[:id])
   end

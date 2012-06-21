@@ -20,7 +20,9 @@ Roadeo::Application.routes.draw do
 
   match '/list',to: 'ideas#index'
 
-  match '/dashboard', to: 'static_pages#dashboard'
+  match '/dashboard', to: 'dashboard#show'
+
+  match '/search', to: 'ideas#search'
 
   match '/admin', to: 'static_pages#admin'
 
