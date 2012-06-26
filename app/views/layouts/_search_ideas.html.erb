@@ -4,4 +4,16 @@
   		<input type="text" class="input-small search-query" action="/search" method="get" placeholder="Search..." >
 	</form>
 
+<form class="form-search">
+  <input type="text" class="input-medium search-query" id="testy">
+  <button type="submit" class="btn" action="/search" method="get">Search</button>
+</form>
+
+
+
+<%=text_field_tag 'query', 'Enter your search query here'%>
+
+<%=button_to("Search", {:controller=>"ideas", :action=>"search", :keyword=>query.text_field}, :method=>"get")%>
+
+
 </form>

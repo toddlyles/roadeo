@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
   end
 
   def search
-
+    flash.now[:success] = "Are we searching yet?"
   end
 
 
